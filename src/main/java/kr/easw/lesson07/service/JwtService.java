@@ -1,9 +1,6 @@
 package kr.easw.lesson07.service;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -82,5 +79,7 @@ public class JwtService {
     public enum ValidateStatus {
         VALID(true), INVALID(false), EXPIRED(false), UNSUPPORTED(false);
         private final boolean valid;
+
     }
+
 }

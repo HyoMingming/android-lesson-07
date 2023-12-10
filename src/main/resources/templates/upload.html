@@ -1,0 +1,36 @@
+<html lang="ko">
+<body>
+<a href="/download"> <--  다운로드 페이지로 </a>
+<h2> 파일 업로드 </h2>
+<!-- 파일 업로드 코드 -->
+<span>파일을 선택하고 업로드 버튼을 눌러주세요.</span>
+<ul id="fileList"></ul>
+<!-- 파일 업로드 폼 -->
+<form method="post" action="api/v1/rest/aws/upload" enctype="multipart/form-data">
+    <input name="file" type="file" accept=".txt, .pdf, .docx" /> <!-- 원하는 파일 확장자로 설정 -->
+    <br/>
+    <input type="submit" value="업로드" /><br/>
+</form>
+
+<span id="message"> </span>
+<script>
+    // 페이지 로드 시 파일 목록을 가져와서 표시
+    (async () => {
+        const response = await fetch('/api/v1/rest/aws/list');
+        const result = await response.json();
+        console.log(result);
+        for (let i = 0; i < result.length; i++) {
+            let li = document.createElement("li");
+            li.appendChild(document.createTextNode(result[i]));
+            document.getElementById("fileList").appendChild(li);
+        }
+    })();
+
+    // 파일 업로드 성공 메시지 확인 후 표시
+    let params = new URLSearchParams(window.location.search);
+    if (params.get("success") != null) {
+        document.getElementById("message").innerHTML = "파일 업로드에 성공하였습니다.";
+    }
+</script>
+</body>
+</html>

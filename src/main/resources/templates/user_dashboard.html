@@ -1,0 +1,51 @@
+<html>
+<body>
+<h1> 사용자 대시보드(다운로드)</h1>
+<h3><a href="/admin">{관리자 대시보드로 이동(업로드)}</a></h3>
+<span> REST 요청을 보내 파일 목록을 불러오고, 다음 li에 다운로드 링크와 함께 삽입하십시오. </span>
+
+<ul id="fileList">
+</ul>
+
+</body>
+<script>
+    // 페이지 로드 시 파일 목록을 가져와서 표시
+    (async () => {
+        const response = await fetch('/api/v1/rest/aws/list');
+        const result = await response.json();
+        console.log(result);
+        for (let i = 0; i < result.length; i++) {
+            let li = document.createElement("li");
+
+            // 새로운 폼 엘리먼트 생성
+            var newForm = document.createElement('form');
+            newForm.method = 'post';
+            newForm.action = '/dashboard'; // 다운로드 대신 대시보드로 이동하도록 수정
+            newForm.enctype= "multipart/form-data";
+
+            // 숨겨진 입력 필드 생성 및 설정
+            var inputKey = document.createElement('input');
+            var inputSub = document.createElement('input');
+            inputKey.setAttribute("type", "hidden");
+            inputKey.setAttribute("name", "fileName");
+            inputKey.setAttribute("value", result[i]);
+
+            // submit 버튼 생성 및 설정
+            inputSub.setAttribute("type", "submit");
+            inputSub.setAttribute("value", "다운로드");
+
+            // 생성한 입력 필드와 버튼을 폼에 추가
+            newForm.appendChild(inputKey);
+            newForm.appendChild(inputSub);
+            newForm.setAttribute("style","display: inline-block");
+
+            // li 엘리먼트에 파일명과 새로운 폼을 추가
+            li.appendChild(document.createTextNode(result[i]));
+            li.appendChild(newForm);
+
+            // 파일 목록에 li 엘리먼트 추가
+            document.getElementById("fileList").appendChild(li);
+        }
+    })()
+</script>
+</html>

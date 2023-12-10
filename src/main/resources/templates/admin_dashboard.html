@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 대시보드(업로드)</title>
+</head>
+<body>
+<h1>관리자 대시보드(업로드)</h1>
+<h3><a href="/dashboard">유저 대시보드로 이동(다운로드)</a></h3>
+<h3><a href="/management">유저 관리 페이지로 이동하기</a></h3>
+
+<ul id="fileList"></ul>
+
+<form method="post" action="api/v1/rest/aws/upload" enctype="multipart/form-data">
+    <input name="file" type="file" value="파일 선택" /><br />
+    <input type="submit" value="업로드" /><br />
+</form>
+
+<span id="message"></span>
+
+<script>
+    (async () => {
+        const response = await fetch('/api/v1/rest/aws/list');
+        const result = await response.json();
+        console.log(result);
+        const fileList = document.getElementById("fileList");
+
+        for (let i = 0; i < result.length; i++) {
+            let li = document.createElement("li");
+            li.appendChild(document.createTextNode(result[i]));
+            fileList.appendChild(li);
+        }
+    })();
+
+    let params = new URLSearchParams(window.location.search);
+    if (params.get("success") != null) {
+        document.getElementById("message").innerHTML = "파일 업로드에 성공하였습니다.";
+    }
+</script>
+</body>
+</html>

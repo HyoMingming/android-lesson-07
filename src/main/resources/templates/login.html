@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign in</title>
+    <!-- Bootstrap CDN 링크 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap 테마용 신규 스타일 추가 (선택 사항) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap-theme.min.css" rel="stylesheet" integrity="sha384-pzjw8L+1zq+qURLbzRKaxxDXSUEJfAe6M5EIoGqF7vKE2z0Ks1PBOhbl6pN1LIbp" crossorigin="anonymous">
+    <!-- 로컬에 저장된 sign-in.css 파일 사용 (선택 사항) -->
+    <!-- <link href="/path/to/your/signin.css" rel="stylesheet"> -->
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+        </p>
+        <input name="_csrf" type="hidden" value="55bzcTwQsXfb7yi2QLz-rciPc2QbN-SiO5nbg_Thhuzw0mbo1qHHFwgm0Eb2jEyOIpHKzPHpXlwoVYaPCKzvs5fQsY7GsVCJ">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+</body>
+</html>
